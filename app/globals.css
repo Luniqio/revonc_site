@@ -1,0 +1,184 @@
+@import "tailwindcss";
+
+/* =========================================================
+   Theme palettes
+   Each theme overrides the same set of CSS variables. The
+   active theme is selected by `<html data-theme="...">` from
+   <ThemeProvider />. Default selector covers the unthemed case.
+   To add a theme: copy a block, change the id, tweak values,
+   and register it in lib/themes.ts.
+   ========================================================= */
+
+:root,
+:root[data-theme="mint"] {
+  --bg:           #eefffe;   /* page background           */
+  --surface:      #f7fffe;   /* cards, raised panels      */
+  --surface-2:    #ddf6f3;   /* tinted soft panels        */
+  --fg:           #00260e;   /* primary text              */
+  --fg-muted:     #245049;   /* secondary text            */
+  --fg-subtle:    #67877f;   /* tertiary text             */
+  --primary:      #176768;   /* solid CTA / accent        */
+  --primary-hover:#0e4f50;
+  --primary-fg:   #eefffe;   /* text on primary           */
+  --accent:       #41c5c0;   /* lighter teal accent       */
+  --border:       rgba(19, 53, 48, 0.12);
+  --border-strong:rgba(19, 53, 48, 0.24);
+  --grad-from:    #176768;
+  --grad-to:      #41c5c0;
+  color-scheme: light;
+}
+
+:root[data-theme="noir"] {
+  --bg:           #f7fefd;
+  --surface:      #ffffff;
+  --surface-2:    #eef0ef;
+  --fg:           #0a0e0c;
+  --fg-muted:     #3a443f;
+  --fg-subtle:    #7a8580;
+  --primary:      #00260e;
+  --primary-hover:#0a1a12;
+  --primary-fg:   #eefffe;
+  --accent:       #2f8f86;
+  --border:       rgba(10, 14, 12, 0.12);
+  --border-strong:rgba(10, 14, 12, 0.30);
+  --grad-from:    #00260e;
+  --grad-to:      #245049;
+  color-scheme: light;
+}
+
+:root[data-theme="dusk"] {
+  --bg:           #00260e;
+  --surface:      #0a2b22;
+  --surface-2:    #0f3329;
+  --fg:           #eefffe;
+  --fg-muted:     rgba(238, 255, 254, 0.7);
+  --fg-subtle:    rgba(238, 255, 254, 0.5);
+  --primary:      #41c5c0;
+  --primary-hover:#75cfc3;
+  --primary-fg:   #00260e;
+  --accent:       #75cfc3;
+  --border:       rgba(238, 255, 254, 0.08);
+  --border-strong:rgba(238, 255, 254, 0.20);
+  --grad-from:    #41c5c0;
+  --grad-to:      #176768;
+  color-scheme: dark;
+}
+
+:root[data-theme="paper"] {
+  --bg:           #f8f3e8;
+  --surface:      #fcf8ed;
+  --surface-2:    #ece4cf;
+  --fg:           #133530;
+  --fg-muted:     #3e645c;
+  --fg-subtle:    #7a8580;
+  --primary:      #133530;
+  --primary-hover:#062c18;
+  --primary-fg:   #f8f3e8;
+  --accent:       #2f8f86;
+  --border:       rgba(19, 53, 48, 0.14);
+  --border-strong:rgba(19, 53, 48, 0.28);
+  --grad-from:    #133530;
+  --grad-to:      #2f8f86;
+  color-scheme: light;
+}
+
+/* =========================================================
+   Tailwind 4 — register the dynamic vars as theme tokens.
+   `inline` makes Tailwind utilities reference the var at
+   render time, so they update when the theme switches.
+
+   Usage examples:
+     class="bg-bg text-fg"
+     class="bg-primary text-primary-fg"
+     class="border border-border"
+   ========================================================= */
+@theme inline {
+  --color-bg:            var(--bg);
+  --color-surface:       var(--surface);
+  --color-surface-2:     var(--surface-2);
+  --color-fg:            var(--fg);
+  --color-fg-muted:      var(--fg-muted);
+  --color-fg-subtle:     var(--fg-subtle);
+  --color-primary:       var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-fg:    var(--primary-fg);
+  --color-accent:        var(--accent);
+  --color-border:        var(--border);
+  --color-border-strong: var(--border-strong);
+  --font-display:        var(--font-display), 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-sans:           var(--font-body), 'Inter', ui-sans-serif, system-ui, sans-serif;
+}
+
+/* =========================================================
+   Base
+   ========================================================= */
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body { height: 100%; }
+
+/* Smooth in-page anchor scrolling, with offset so the navbar (h-20 = 80px)
+   doesn't cover the section heading. Disabled when the user prefers
+   reduced motion. */
+html { scroll-padding-top: 6rem; }
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+
+body {
+  background:
+    linear-gradient(86deg, #176768 4.61%, #41C5C0 143.9%),
+    #FFF;
+  background-attachment: fixed;
+  color: var(--fg);
+  font-family: var(--font-body), 'Inter', ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: color 200ms ease;
+}
+
+::selection { background: var(--accent); color: var(--fg); }
+
+/* =========================================================
+   Gutter pattern — tiles in the space outside the centered
+   max-w-5xl container (left/right of navbar inner + main).
+   ========================================================= */
+.gutter-pattern {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  pointer-events: none;
+  background-image: url('/pattern.png');
+  background-size: 14px 14px;
+  background-repeat: repeat;
+  image-rendering: pixelated;
+  opacity: 0.07;
+  z-index: 0;
+}
+.gutter-pattern--left  { left: 0; right: calc(50% + 32rem); }
+.gutter-pattern--right { right: 0; left:  calc(50% + 32rem); }
+
+/* Same pattern, scoped to the centered navbar band so the
+   whole navbar (gutters + center) reads as patterned. */
+.navbar-pattern-fill {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: url('/pattern.png');
+  background-size: 14px 14px;
+  background-repeat: repeat;
+  image-rendering: pixelated;
+  opacity: 0.07;
+}
+
+/* Testimonial card — Figma spec (size handled by grid) */
+.testimonial-card {
+  border-radius: 20px;
+  background: #FFFFFF;
+  box-shadow:
+    0 220px 62px 0 rgba(0, 0, 0, 0.00),
+    0 141px 56px 0 rgba(0, 0, 0, 0.01),
+    0 79px 48px 0 rgba(0, 0, 0, 0.02),
+    0 35px 35px 0 rgba(0, 0, 0, 0.03),
+    0 9px 19px 0 rgba(0, 0, 0, 0.04);
+}
