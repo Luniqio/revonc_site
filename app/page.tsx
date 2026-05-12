@@ -81,7 +81,7 @@ export default function Home() {
         <div className="relative -mx-6 flex justify-center md:mx-0">
           <div
             aria-hidden
-            className="pointer-events-none absolute left-1/2 top-1/2 h-130.25 w-130.25 -translate-x-1/2 -translate-y-1/2 rounded-[260.505px] bg-white opacity-25 blur-[72px]"
+            className="pointer-events-none absolute left-1/2 top-1/2 h-60 w-60 -translate-x-1/2 -translate-y-1/2 rounded-[260.505px] bg-white opacity-25 blur-[72px] md:h-130.25 md:w-130.25"
           />
           <Image
             src="/hero_img.png"
@@ -594,13 +594,15 @@ export default function Home() {
         <footer id="footer" className="px-6">
           <div className="mx-auto max-w-5xl border-t border-[#00260e]/15 py-8 text-sm">
             <div className="flex flex-col items-start gap-4 md:flex-row md:flex-wrap md:items-center md:justify-between md:gap-x-8 md:gap-y-4">
-              <Image
-                src="/branding/revonc_full.svg"
-                alt="Revonc"
-                width={120}
-                height={28}
-                className="h-7 w-auto"
-              />
+              <Link href="/" aria-label="Naar de homepage" className="inline-flex">
+                <Image
+                  src="/branding/revonc_full.svg"
+                  alt="Revonc"
+                  width={120}
+                  height={28}
+                  className="h-7 w-auto"
+                />
+              </Link>
               <span>© 2026 RevOnc BV — Voskenslaan 464, 9000 Gent</span>
               <a
                 href="mailto:yorin@revonc.be"

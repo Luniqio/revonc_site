@@ -66,7 +66,7 @@ export default function RootLayout({
     <html
       lang="nl"
       data-theme={DEFAULT_THEME}
-      className={`${inter.variable} ${akihiko.variable}`}
+      className={`${inter.variable} ${akihiko.variable} overflow-x-clip`}
       suppressHydrationWarning
     >
       <head>

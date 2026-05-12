@@ -122,8 +122,7 @@ export default function VoorOrganisatiesPage() {
             style={{ fontFamily: "var(--font-display)" }}
           >
             <span className="text-white">Voor elk type organisatie</span>
-            <br />
-            <span className="text-[#75cfc3]">een passend model.</span>
+            <span className="text-[#75cfc3]"> een passend model.</span>
           </h2>
         </div>
 
@@ -161,8 +160,7 @@ export default function VoorOrganisatiesPage() {
               style={{ fontFamily: "var(--font-display)" }}
             >
               <span className="text-[#00260e]">Waarom organisaties kiezen</span>
-              <br />
-              <span className="text-[#41c5c0]">voor RevOnc.</span>
+              <span className="text-[#41c5c0]"> voor RevOnc.</span>
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed">
               Geen maanden onboarding. Geen IT-projecten. Resultaat vanaf dag
@@ -270,13 +268,15 @@ export default function VoorOrganisatiesPage() {
         <footer id="footer" className="px-6">
           <div className="mx-auto max-w-5xl border-t border-[#00260e]/15 py-8 text-sm">
             <div className="flex flex-col items-start gap-4 md:flex-row md:flex-wrap md:items-center md:justify-between md:gap-x-8 md:gap-y-4">
-              <Image
-                src="/branding/revonc_full.svg"
-                alt="Revonc"
-                width={120}
-                height={28}
-                className="h-7 w-auto"
-              />
+              <Link href="/" aria-label="Naar de homepage" className="inline-flex">
+                <Image
+                  src="/branding/revonc_full.svg"
+                  alt="Revonc"
+                  width={120}
+                  height={28}
+                  className="h-7 w-auto"
+                />
+              </Link>
               <span>© 2026 RevOnc BV — Voskenslaan 464, 9000 Gent</span>
               <a href="mailto:yorin@revonc.be" className="hover:underline">
                 yorin@revonc.be

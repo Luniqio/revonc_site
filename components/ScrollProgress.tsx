@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 
 /* Routes that opt out of the scroll progress line. */
-const HIDDEN_ON = ["/verhaal", "/voor-organisaties"];
+const HIDDEN_ON = ["/verhaal", "/voor-organisaties", "/privacy", "/voorwaarden"];
 
 /* Probe = vertical position inside the viewport that the orange/white
    boundary tracks. 0.55 = just past the visual centre of the screen. */
