@@ -13,7 +13,7 @@ export function SiteFooter() {
       />
       <footer id="footer" className="px-6">
         <div className="mx-auto max-w-5xl border-t border-[#00260e]/15 py-8 text-sm">
-          <div className="flex flex-wrap items-center justify-between gap-x-8 gap-y-4">
+          <div className="flex flex-col items-start gap-4 md:flex-row md:flex-wrap md:items-center md:justify-between md:gap-x-8 md:gap-y-4">
             <Image
               src="/branding/revonc_full.svg"
               alt="Revonc"

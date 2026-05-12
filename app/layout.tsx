@@ -7,6 +7,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { ThemeSwitcher } from "@/components/ThemeSwitcher";
 import { NavMenu } from "@/components/NavMenu";
+import { MobileMenu } from "@/components/MobileMenu";
 import { ScrollProgress } from "@/components/ScrollProgress";
 import { DEFAULT_THEME, STORAGE_KEY, THEMES } from "@/lib/themes";
 
@@ -75,7 +76,7 @@ export default function RootLayout({
         <ThemeProvider>
           <div aria-hidden className="gutter-pattern gutter-pattern--left" />
           <div aria-hidden className="gutter-pattern gutter-pattern--right" />
-          <header className="border-b border-[#CFCFCF]/20">
+          <header className="relative z-50 border-b border-[#CFCFCF]/20">
             <div className="relative isolate mx-auto grid h-20 w-full max-w-5xl grid-cols-[1fr_auto_1fr] items-center border-x border-[#CFCFCF]/20 px-4">
               <div aria-hidden className="navbar-pattern-fill" />
               <Link href="/" className="inline-flex items-center justify-self-start">
@@ -89,12 +90,15 @@ export default function RootLayout({
                 />
               </Link>
               <NavMenu className="justify-self-center" />
-              <Link
-                href="/#contact"
-                className="justify-self-end rounded-[100px] border border-[#E7E7E4] bg-white px-5 py-2 text-sm font-normal text-[#176768] shadow-[0_26px_27.4px_0_rgba(0,0,0,0.10)] transition-colors duration-200 ease-out hover:bg-white/90 hover:text-[#0E4F50]"
-              >
-                Plan een gesprek
-              </Link>
+              <div className="col-start-3 justify-self-end">
+                <Link
+                  href="/#contact"
+                  className="hidden rounded-[100px] border border-[#E7E7E4] bg-white px-5 py-2 text-sm font-normal text-[#176768] shadow-[0_26px_27.4px_0_rgba(0,0,0,0.10)] transition-colors duration-200 ease-out hover:bg-white/90 hover:text-[#0E4F50] md:inline-flex"
+                >
+                  Plan een gesprek
+                </Link>
+                <MobileMenu />
+              </div>
               <Image
                 src="/cross.svg"
                 alt=""

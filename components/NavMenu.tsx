@@ -14,7 +14,7 @@ const items = [
 export function NavMenu({ className = "" }: { className?: string }) {
   const pathname = usePathname();
   return (
-    <nav className={`flex items-center gap-7 whitespace-nowrap text-sm text-white ${className}`}>
+    <nav className={`hidden items-center gap-7 whitespace-nowrap text-sm text-white md:flex ${className}`}>
       {items.map(({ href, label }) => {
         const active = pathname === href;
         return (

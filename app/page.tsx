@@ -78,7 +78,7 @@ export default function Home() {
           </Link>
         </div>
 
-        <div className="relative flex justify-center">
+        <div className="relative -mx-6 flex justify-center md:mx-0">
           <div
             aria-hidden
             className="pointer-events-none absolute left-1/2 top-1/2 h-130.25 w-130.25 -translate-x-1/2 -translate-y-1/2 rounded-[260.505px] bg-white opacity-25 blur-[72px]"
@@ -117,7 +117,7 @@ export default function Home() {
         </div>
 
         <div className="space-y-16">
-          <div className="border-l border-white/20 pl-6 ml-30">
+          <div className="border-l border-white/20 pl-6 md:ml-30">
             <div
               className="text-7xl font-medium leading-[0.9] text-[#FB923C] md:text-8xl"
               style={{ fontFamily: "var(--font-display)" }}
@@ -147,7 +147,7 @@ export default function Home() {
         id="oplossing"
         className="grid grid-cols-1 gap-16 px-6 py-24 md:grid-cols-2 md:gap-16"
       >
-        <div className="grid grid-cols-[15.4375rem_15.4375rem] gap-3.5">
+        <div className="order-2 grid grid-cols-1 gap-3.5 md:order-1 md:grid-cols-[15.4375rem_15.4375rem]">
           <article className="flex flex-col items-start gap-3.5 rounded-[10px] bg-[#398E8D] p-3.5">
             <h3
               className="text-lg font-medium capitalize leading-[1.4] tracking-[0.36px] text-[#FFA17A]"
@@ -174,7 +174,7 @@ export default function Home() {
             </p>
           </article>
 
-          <article className="col-span-2 flex flex-col items-start gap-3.5 rounded-[10px] bg-[#398E8D] p-3.5">
+          <article className="flex flex-col items-start gap-3.5 rounded-[10px] bg-[#398E8D] p-3.5 md:col-span-2">
             <h3
               className="text-lg font-medium capitalize leading-[1.4] tracking-[0.36px] text-[#FFA17A]"
               style={{ fontFamily: "var(--font-display)" }}
@@ -213,7 +213,7 @@ export default function Home() {
           </article>
         </div>
 
-        <div className="text-right">
+        <div className="order-1 text-left md:order-2 md:text-right">
           <h2
             className="text-4xl font-medium leading-[0.95] tracking-[-1px] md:text-5xl"
             style={{ fontFamily: "var(--font-display)" }}
@@ -224,7 +224,7 @@ export default function Home() {
               vijf stappen naar jouw beweegdroom.
             </span>
           </h2>
-          <p className="ml-auto mt-8 max-w-2xs text-sm leading-relaxed text-white/80">
+          <p className="mt-8 max-w-2xs text-sm leading-relaxed text-white/80 md:ml-auto">
             RevOnc stelt een persoonlijk programma samen op basis van jouw
             niveau. Elke dag weet je wat je moet doen.
           </p>
@@ -250,9 +250,7 @@ export default function Home() {
               <span className="text-[#41c5c0]">Onderbouwd.</span>
             </h2>
             <p className="mx-auto mt-6 max-w-md text-sm leading-relaxed">
-              Pilootprogramma bij AZorg Aalst. 40% patiënten, 10 weken.
-              <br />
-              In samenwerking met Prof. Marieke De Craemer (UGent).
+              Pilootprogramma bij AZorg Aalst. 40% patiënten, 10 weken. In samenwerking met Prof. Marieke De Craemer (UGent).
             </p>
           </div>
 
@@ -381,7 +379,7 @@ export default function Home() {
           </p>
         </div>
 
-        <div className="mt-16 grid grid-cols-3 gap-6">
+        <div className="mt-16 grid grid-cols-1 justify-items-center gap-6 md:grid-cols-3">
           <article className="testimonial-card flex flex-col overflow-hidden">
             <div className="flex h-42 items-center justify-center bg-[#1A1A1A]">
               <button
@@ -470,9 +468,7 @@ export default function Home() {
           verzekeraar of farmabedrijf?
         </h2>
         <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-white/90">
-          RevOnc biedt organisaties een kant-en-klaar digitaal nazorgplatform.
-          <br />
-          Standalone, klinisch onderbouwd, geen IT-integratie nodig.
+          RevOnc biedt organisaties een kant-en-klaar digitaal nazorgplatform. Standalone, klinisch onderbouwd, geen IT-integratie nodig.
         </p>
         <div className="mt-10 flex justify-center">
           <Link
@@ -497,7 +493,7 @@ export default function Home() {
           <span className="text-[#75cfc3]">Vragen.</span>
         </h2>
 
-        <div className="mt-25">
+        <div className="md:mt-25">
           <FaqAccordion items={faqs} />
         </div>
       </section>
@@ -597,7 +593,7 @@ export default function Home() {
 
         <footer id="footer" className="px-6">
           <div className="mx-auto max-w-5xl border-t border-[#00260e]/15 py-8 text-sm">
-            <div className="flex flex-wrap items-center justify-between gap-x-8 gap-y-4">
+            <div className="flex flex-col items-start gap-4 md:flex-row md:flex-wrap md:items-center md:justify-between md:gap-x-8 md:gap-y-4">
               <Image
                 src="/branding/revonc_full.svg"
                 alt="Revonc"

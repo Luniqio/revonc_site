@@ -219,7 +219,7 @@ export function ScrollProgress() {
     <div
       ref={wrapRef}
       aria-hidden
-      className="pointer-events-none absolute top-[35vh] right-0 bottom-0 -left-0.75 -z-10"
+      className="pointer-events-none absolute top-[35vh] right-0 bottom-0 -left-0.75 -z-10 hidden md:block"
     >
       <svg
         width="100%"
