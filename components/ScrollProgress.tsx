@@ -260,7 +260,7 @@ export function ScrollProgress() {
           strokeLinecap="round"
           vectorEffect="non-scaling-stroke"
           clipPath="url(#line-clip-teal)"
-          style={{ strokeWidth: "6px" }}
+          style={{ strokeWidth: "8px" }}
         />
         {/* Track over white-bg sections (#176768 at 20%) */}
         <path
@@ -270,7 +270,7 @@ export function ScrollProgress() {
           strokeLinecap="round"
           vectorEffect="non-scaling-stroke"
           clipPath="url(#line-clip-white)"
-          style={{ strokeWidth: "6px" }}
+          style={{ strokeWidth: "8px" }}
         />
         {/* Orange fill (single, no clip) */}
         <path
@@ -280,7 +280,10 @@ export function ScrollProgress() {
           stroke="#FFA17A"
           strokeLinecap="round"
           vectorEffect="non-scaling-stroke"
-          style={{ strokeWidth: "6px" }}
+          style={{
+            strokeWidth: "8px",
+            filter: "drop-shadow(0 0 4px rgba(255, 161, 122, 0.7)) drop-shadow(0 0 10px rgba(255, 161, 122, 0.35))",
+          }}
         />
       </svg>
     </div>

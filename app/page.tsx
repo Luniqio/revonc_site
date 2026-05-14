@@ -51,7 +51,7 @@ export default function Home() {
         >
           Jouw herstel,
           <br />
-          Jouw pad.
+          <span className="text-[#75cfc3]">Jouw pad.</span>
         </h1>
 
         <p className="mx-auto mt-8 max-w-xl text-base leading-relaxed text-white/90">
@@ -64,13 +64,13 @@ export default function Home() {
         <div className="mt-10 flex justify-center">
           <Link
             href="/#contact"
-            className="inline-flex items-center gap-3 rounded-[100px] border border-[#E7E7E4] bg-white px-7 py-3.5 text-base font-normal text-[#176768] shadow-[0_26px_27.4px_0_rgba(0,0,0,0.10)] transition-colors duration-200 ease-out hover:bg-white/90 hover:text-[#0E4F50]"
+            className="inline-flex items-center gap-3 rounded-[100px] bg-[#FFA17A] px-7 py-3.5 text-base font-normal text-[#00260e] transition-opacity duration-200 ease-out hover:opacity-90"
           >
             <svg
               viewBox="0 0 24 24"
               fill="currentColor"
               aria-hidden
-              className="h-5 w-5 text-[#F97316]"
+              className="h-5 w-5 text-[#00260e]"
             >
               <path d="M12 0 L13 11 L24 12 L13 13 L12 24 L11 13 L0 12 L11 11 Z" />
             </svg>
@@ -119,7 +119,7 @@ export default function Home() {
         <div className="space-y-16">
           <div className="border-l border-white/20 pl-6 md:ml-30">
             <div
-              className="text-7xl font-medium leading-[0.9] text-[#FB923C] md:text-8xl"
+              className="text-7xl font-medium leading-[0.9] text-[#ffa17a] md:text-8xl"
               style={{ fontFamily: "var(--font-display)" }}
             >
               40%
@@ -131,7 +131,7 @@ export default function Home() {
 
           <div className="border-l border-white/20 pl-6">
             <div
-              className="text-7xl font-medium leading-[0.9] text-[#FB923C] md:text-8xl"
+              className="text-7xl font-medium leading-[0.9] text-[#ffa17a] md:text-8xl"
               style={{ fontFamily: "var(--font-display)" }}
             >
               0
@@ -239,7 +239,7 @@ export default function Home() {
           aria-hidden
           className="absolute inset-0 -z-20 rounded-[20px] bg-[#DEF7F6]"
         />
-        <div className="mx-auto max-w-5xl px-6 md:px-12">
+        <div className="mx-auto max-w-300 px-6 md:px-12">
           <div className="text-center">
             <h2
               className="text-4xl font-medium leading-[0.95] tracking-[-1px] md:text-5xl"
@@ -385,7 +385,7 @@ export default function Home() {
               <button
                 type="button"
                 aria-label="Speel video af"
-                className="flex h-12 w-12 items-center justify-center rounded-full bg-[#FFA17A] transition-colors hover:bg-[#FF8C42]"
+                className="flex h-12 w-12 items-center justify-center rounded-full bg-[#FFA17A] transition-opacity hover:opacity-90"
               >
                 <svg
                   viewBox="0 0 24 24"
@@ -473,7 +473,7 @@ export default function Home() {
         <div className="mt-10 flex justify-center">
           <Link
             href="/voor-organisaties"
-            className="rounded-full bg-[#FFA17A] px-7 py-3.5 text-base font-normal text-[#00260e] transition-colors duration-200 ease-out hover:bg-[#FF8C42]"
+            className="rounded-full bg-[#FFA17A] px-7 py-3.5 text-base font-normal text-[#00260e] transition-opacity duration-200 ease-out hover:opacity-90"
           >
             Ontdek ons aanbod
           </Link>
@@ -507,7 +507,7 @@ export default function Home() {
           className="absolute inset-0 -z-20 rounded-t-[20px] bg-[#DEF7F6]"
         />
         <section id="contact" className="px-6 py-20">
-          <div className="mx-auto max-w-5xl">
+          <div className="mx-auto max-w-300">
             <div className="text-center">
               <h2
                 className="mx-auto max-w-3xl text-5xl font-medium leading-[0.95] tracking-[-1.5px] md:text-7xl"
@@ -592,7 +592,7 @@ export default function Home() {
         </section>
 
         <footer id="footer" className="px-6">
-          <div className="mx-auto max-w-5xl border-t border-[#00260e]/15 py-8 text-sm">
+          <div className="mx-auto max-w-300 border-t border-[#00260e]/15 py-8 text-sm">
             <div className="flex flex-col items-start gap-4 md:flex-row md:flex-wrap md:items-center md:justify-between md:gap-x-8 md:gap-y-4">
               <Link href="/" aria-label="Naar de homepage" className="inline-flex">
                 <Image

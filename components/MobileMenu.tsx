@@ -100,7 +100,7 @@ export function MobileMenu() {
         <Link
           href="/#contact"
           onClick={() => setOpen(false)}
-          className="mx-auto rounded-[100px] border border-[#E7E7E4] bg-white px-7 py-3 text-base font-normal text-[#176768] shadow-[0_26px_27.4px_0_rgba(0,0,0,0.10)]"
+          className="mx-auto rounded-[100px] bg-[#FFA17A] px-7 py-3 text-base font-normal text-[#00260e] transition-opacity duration-200 ease-out hover:opacity-90"
         >
           Plan een gesprek
         </Link>

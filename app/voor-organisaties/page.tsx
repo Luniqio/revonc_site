@@ -126,7 +126,7 @@ export default function VoorOrganisatiesPage() {
           </h2>
         </div>
 
-        <div className="mx-auto mt-12 grid max-w-5xl grid-cols-1 gap-3.5 md:grid-cols-3">
+        <div className="mx-auto mt-12 grid max-w-300 grid-cols-1 gap-3.5 md:grid-cols-3">
           {segmenten.map(({ title, body }) => (
             <article
               key={title}
@@ -153,7 +153,7 @@ export default function VoorOrganisatiesPage() {
           aria-hidden
           className="absolute inset-0 -z-20 rounded-[20px] bg-[#DEF7F6]"
         />
-        <div className="mx-auto max-w-5xl px-6 md:px-12">
+        <div className="mx-auto max-w-300 px-6 md:px-12">
           <div className="text-center">
             <h2
               className="mx-auto max-w-2xl text-4xl font-medium leading-[0.95] tracking-[-1px] md:text-5xl"
@@ -220,7 +220,7 @@ export default function VoorOrganisatiesPage() {
 
       {/* Closing CTA — on teal/gradient bg ---------------------------- */}
       <section className="px-6 py-24">
-        <div className="mx-auto max-w-5xl">
+        <div className="mx-auto max-w-300">
           <div className="text-center">
             <h2
               className="mx-auto max-w-2xl text-4xl font-medium leading-[0.95] tracking-[-1px] md:text-5xl"
@@ -266,7 +266,7 @@ export default function VoorOrganisatiesPage() {
         />
 
         <footer id="footer" className="px-6">
-          <div className="mx-auto max-w-5xl border-t border-[#00260e]/15 py-8 text-sm">
+          <div className="mx-auto max-w-300 border-t border-[#00260e]/15 py-8 text-sm">
             <div className="flex flex-col items-start gap-4 md:flex-row md:flex-wrap md:items-center md:justify-between md:gap-x-8 md:gap-y-4">
               <Link href="/" aria-label="Naar de homepage" className="inline-flex">
                 <Image

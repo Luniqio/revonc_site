@@ -12,7 +12,7 @@ export function SiteFooter() {
         className="absolute inset-0 -z-20 rounded-t-[20px] bg-[#DEF7F6]"
       />
       <footer id="footer" className="px-6">
-        <div className="mx-auto max-w-5xl border-t border-[#00260e]/15 py-8 text-sm">
+        <div className="mx-auto max-w-300 border-t border-[#00260e]/15 py-8 text-sm">
           <div className="flex flex-col items-start gap-4 md:flex-row md:flex-wrap md:items-center md:justify-between md:gap-x-8 md:gap-y-4">
             <Link href="/" aria-label="Naar de homepage" className="inline-flex">
               <Image
