@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 
 /* Routes that opt out of the scroll progress line. */
-const HIDDEN_ON = ["/verhaal", "/voor-organisaties", "/privacy", "/voorwaarden"];
+const HIDDEN_ON = ["/verhaal", "/voor-organisaties", "/privacy", "/voorwaarden", "/download"];
 
 /* Probe = vertical position inside the viewport that the orange/white
    boundary tracks. 0.55 = just past the visual centre of the screen. */
@@ -65,15 +65,29 @@ function buildPath(points: { x: number; y: number }[]): string {
   return d;
 }
 
-/* Progress = how far the viewport-probe has travelled from the start of
-   the path (y=0 in wrap coords) to its end (= the last waypoint's y),
-   not the full wrapper height. This way the orange reaches 100% exactly
-   when the probe hits the line's stopping point. */
-function probeProgress(wrap: Element, pathEndY: number): number {
-  if (pathEndY <= 0) return 0;
+/* Progress = the arc-length fraction of the path at which it crosses the
+   probe's y-coordinate. Reading geometry from the path itself (rather
+   than dividing by a fixed `pathEndY`) keeps the orange tip anchored to
+   the section under the probe even when content below the probe changes
+   height — e.g. when an FAQ accordion opens and pushes the last waypoint
+   further down the page. */
+function probeProgress(wrap: Element, fill: SVGPathElement | null): number {
+  if (!fill) return 0;
+  const total = fill.getTotalLength();
+  if (total <= 0) return 0;
   const rect = wrap.getBoundingClientRect();
-  const probe = window.innerHeight * PROBE;
-  return Math.min(1, Math.max(0, (probe - rect.top) / pathEndY));
+  const probeY = window.innerHeight * PROBE - rect.top;
+  if (probeY <= 0) return 0;
+  // Binary-search the arc-length whose point.y matches probeY.
+  // 20 iterations is sub-pixel precision for any realistic page height.
+  let lo = 0;
+  let hi = total;
+  for (let i = 0; i < 20; i++) {
+    const mid = (lo + hi) / 2;
+    if (fill.getPointAtLength(mid).y < probeY) lo = mid;
+    else hi = mid;
+  }
+  return Math.min(1, Math.max(0, ((lo + hi) / 2) / total));
 }
 
 export function ScrollProgress() {
@@ -81,8 +95,6 @@ export function ScrollProgress() {
   // A non-SVG wrapper gives us reliable CSS-driven dimensions to measure.
   const wrapRef = useRef<HTMLDivElement>(null);
   const fillRef = useRef<SVGPathElement>(null);
-  const lengthRef = useRef(0);
-  const pathEndYRef = useRef(0);
   const [data, setData] = useState({
     path: "M 0 0",
     w: 1,
@@ -96,6 +108,7 @@ export function ScrollProgress() {
     if (!wrap) return;
 
     let rafId: number | null = null;
+    let debounceId: ReturnType<typeof setTimeout> | null = null;
     let lastW = 0;
     let lastH = 0;
 
@@ -129,10 +142,6 @@ export function ScrollProgress() {
         points.unshift({ x: points[0].x, y: 0 });
       }
 
-      // Stash the path's last y so progress maps 0..1 over the path, not
-      // over the wrapper (which extends to the bottom of <main>).
-      pathEndYRef.current = points[points.length - 1].y;
-
       const whiteRanges: YRange[] = [];
       for (const id of WHITE_BG_ELEMENT_IDS) {
         const el = document.getElementById(id);
@@ -149,9 +158,33 @@ export function ScrollProgress() {
       setData({ path: buildPath(points), w, h, whiteRanges, tealRanges });
     };
 
-    const schedule = () => {
+    const runRebuild = () => {
       if (rafId !== null) return;
       rafId = requestAnimationFrame(rebuild);
+    };
+
+    // Width changes (window resize) need an immediate rebuild — otherwise
+    // the viewBox would lag behind the SVG's CSS width and the path would
+    // visibly stretch horizontally. Height-only changes are usually from
+    // in-page content animating open/closed (e.g. the FAQ accordion);
+    // rebuilding the path mid-animation reshapes the curve every frame
+    // and the user sees the line jitter. Debounce those so we redraw
+    // once after the animation settles.
+    const schedule = () => {
+      const w = wrap.getBoundingClientRect().width;
+      if (w !== lastW) {
+        if (debounceId !== null) {
+          clearTimeout(debounceId);
+          debounceId = null;
+        }
+        runRebuild();
+      } else {
+        if (debounceId !== null) clearTimeout(debounceId);
+        debounceId = setTimeout(() => {
+          debounceId = null;
+          runRebuild();
+        }, 350);
+      }
     };
 
     rebuild();
@@ -162,28 +195,27 @@ export function ScrollProgress() {
       ro.disconnect();
       window.removeEventListener("resize", schedule);
       if (rafId !== null) cancelAnimationFrame(rafId);
+      if (debounceId !== null) clearTimeout(debounceId);
     };
     // pathname is in deps so the effect re-runs when navigating back to a
     // route where the line is shown. On hidden routes this returns null
     // and the early `if (!wrap) return;` bails out cleanly.
   }, [pathname]);
 
-  // When path changes: recompute length and apply the current scroll
-  // progress. Defer the dashoffset write by one frame so any pending
-  // scroll reset (e.g. Next.js scrolling to top after route navigation)
-  // has time to settle — otherwise we'd read the previous page's
-  // scrollY and the bar would land on the wrong value.
+  // When the path rebuilds (initial mount, layout shifts, resize), reapply
+  // progress. The path uses pathLength="1" so dasharray stays at 1 and
+  // only the dashoffset changes — no race where a stale dasharray makes
+  // the stroke render fully solid. Defer the write by one frame so any
+  // pending scroll reset (e.g. Next.js scrolling to top after route
+  // navigation) has time to settle.
   useEffect(() => {
     const fill = fillRef.current;
     const wrap = wrapRef.current;
     if (!fill || !wrap) return;
-    const len = fill.getTotalLength();
-    lengthRef.current = len;
-    fill.style.strokeDasharray = `${len}`;
     const rafId = requestAnimationFrame(() => {
       if (fillRef.current && wrapRef.current) {
         fillRef.current.style.strokeDashoffset = `${
-          len * (1 - probeProgress(wrapRef.current, pathEndYRef.current))
+          1 - probeProgress(wrapRef.current, fillRef.current)
         }`;
       }
     });
@@ -195,9 +227,9 @@ export function ScrollProgress() {
     const update = () => {
       const fill = fillRef.current;
       const wrap = wrapRef.current;
-      if (fill && wrap && lengthRef.current > 0) {
+      if (fill && wrap) {
         fill.style.strokeDashoffset = `${
-          lengthRef.current * (1 - probeProgress(wrap, pathEndYRef.current))
+          1 - probeProgress(wrap, fill)
         }`;
       }
       ticking = false;
@@ -221,9 +253,15 @@ export function ScrollProgress() {
       aria-hidden
       className="pointer-events-none absolute top-[35vh] right-0 bottom-0 -left-0.75 -z-10 hidden md:block"
     >
+      {/* Width tracks the wrap (100%), but height is pinned to data.h in
+          pixels rather than 100% of the wrap. Otherwise the SVG would
+          grow with the wrap whenever in-page content expands (e.g. FAQ
+          accordion opening), and with the viewBox lagging until the next
+          rebuild, preserveAspectRatio="none" would stretch the path
+          vertically every frame of the animation. */}
       <svg
         width="100%"
-        height="100%"
+        height={data.h}
         viewBox={`0 0 ${data.w} ${data.h}`}
         preserveAspectRatio="none"
         style={{ display: "block", overflow: "visible" }}
@@ -272,16 +310,23 @@ export function ScrollProgress() {
           clipPath="url(#line-clip-white)"
           style={{ strokeWidth: "8px" }}
         />
-        {/* Orange fill (single, no clip) */}
+        {/* Orange fill (single, no clip). pathLength=1 normalizes the
+            stroke-dash math so dasharray stays at 1 and dashoffset=(1-p)
+            in [0..1] regardless of the path's actual geometric length.
+            Initial dashoffset=1 keeps the stroke hidden until JS writes
+            a real progress. */}
         <path
           ref={fillRef}
           d={data.path}
+          pathLength={1}
           fill="none"
           stroke="#FFA17A"
           strokeLinecap="round"
           vectorEffect="non-scaling-stroke"
           style={{
             strokeWidth: "8px",
+            strokeDasharray: 1,
+            strokeDashoffset: 1,
             filter: "drop-shadow(0 0 4px rgba(255, 161, 122, 0.7)) drop-shadow(0 0 10px rgba(255, 161, 122, 0.35))",
           }}
         />

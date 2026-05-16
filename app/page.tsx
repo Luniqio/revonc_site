@@ -493,7 +493,7 @@ export default function Home() {
           <span className="text-[#75cfc3]">Vragen.</span>
         </h2>
 
-        <div className="md:mt-25">
+        <div className="md:mt-20">
           <FaqAccordion items={faqs} />
         </div>
       </section>

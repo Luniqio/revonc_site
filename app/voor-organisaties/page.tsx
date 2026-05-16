@@ -218,8 +218,9 @@ export default function VoorOrganisatiesPage() {
         </div>
       </section>
 
+
       {/* Closing CTA — on teal/gradient bg ---------------------------- */}
-      <section className="px-6 py-24">
+      <section className="px-6 py-24 border-t border-white/15">
         <div className="mx-auto max-w-300">
           <div className="text-center">
             <h2
