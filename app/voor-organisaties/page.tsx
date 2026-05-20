@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { FormsubmitForm } from "@/components/FormsubmitForm";
 
 const segmenten = [
   {
@@ -51,11 +52,15 @@ function FormField({
   label,
   type = "text",
   light = false,
+  required = false,
+  name,
 }: {
   id: string;
   label: string;
   type?: string;
   light?: boolean;
+  required?: boolean;
+  name?: string;
 }) {
   const labelCls = light ? "text-white/80" : "text-[#00260e]";
   const inputCls = light
@@ -68,8 +73,9 @@ function FormField({
       </label>
       <input
         id={id}
-        name={id}
+        name={name ?? id}
         type={type}
+        required={required}
         className={`mt-1 w-full border-b bg-transparent py-1 text-sm outline-none ${inputCls}`}
       />
     </div>
@@ -96,18 +102,19 @@ export default function VoorOrganisatiesPage() {
         </p>
 
         <div className="mx-auto mt-10 max-w-md rounded-2xl bg-[#DEF7F6] p-8 text-[#00260e]">
-          <form className="space-y-5 text-left">
-            <FormField id="org-naam" label="Naam" />
-            <FormField id="org-bedrijf" label="Bedrijf / Organisatie" />
-            <FormField id="org-email" label="E-mailadres" type="email" />
-            <FormField id="org-tel" label="Telefoonnummer" type="tel" />
-            <button
-              type="submit"
-              className="mt-2 w-full cursor-pointer rounded-full bg-[#41c5c0] px-6 py-2.5 text-sm font-normal text-white transition-colors duration-200 ease-out hover:bg-[#176768]"
-            >
-              Plan een kennismaking
-            </button>
-          </form>
+          <FormsubmitForm
+            className="space-y-5 text-left"
+            subject="🤝 Kennismaking aanvraag (B2B)"
+            formulier="Kennismaking B2B (voor-organisaties hero)"
+            autoresponse="Bedankt voor uw bericht! Yorin neemt binnen 24 uur contact met u op om een kennismaking in te plannen. — Team RevOnc"
+            submitLabel="Plan een kennismaking"
+            submitClassName="mt-2 w-full cursor-pointer rounded-full bg-[#41c5c0] px-6 py-2.5 text-sm font-normal text-white transition-colors duration-200 ease-out hover:bg-[#176768] disabled:cursor-not-allowed disabled:opacity-60"
+          >
+            <FormField id="org-naam" name="naam" label="Naam" required />
+            <FormField id="org-bedrijf" name="bedrijf" label="Bedrijf / Organisatie" />
+            <FormField id="org-email" name="email" label="E-mailadres" type="email" required />
+            <FormField id="org-tel" name="telefoon" label="Telefoonnummer" type="tel" />
+          </FormsubmitForm>
           <p className="mt-4 text-center text-xs text-[#00260e]/70">
             We nemen binnen 24 uur contact met u op.
           </p>
@@ -133,7 +140,7 @@ export default function VoorOrganisatiesPage() {
               className="flex flex-col items-start gap-3.5 rounded-[10px] bg-[#398E8D] p-5"
             >
               <h3
-                className="text-lg font-medium capitalize leading-[1.4] tracking-[0.36px] text-[#FFA17A]"
+                className="text-lg font-medium capitalize leading-[1.4] tracking-[0.36px] text-white"
                 style={{ fontFamily: "var(--font-display)" }}
               >
                 {title}
@@ -237,18 +244,19 @@ export default function VoorOrganisatiesPage() {
           </div>
 
           <div className="mx-auto mt-12 max-w-md rounded-2xl bg-[#DEF7F6] p-8 text-[#00260e]">
-            <form className="space-y-5">
-              <FormField id="rep-naam" label="Naam" />
-              <FormField id="rep-bedrijf" label="Bedrijf / Organisatie" />
-              <FormField id="rep-email" label="E-mailadres" type="email" />
-              <FormField id="rep-tel" label="Telefoonnummer" type="tel" />
-              <button
-                type="submit"
-                className="mt-2 w-full cursor-pointer rounded-full bg-[#41c5c0] px-6 py-2.5 text-sm font-normal text-white transition-colors duration-200 ease-out hover:bg-[#176768]"
-              >
-                Vraag het rapport aan
-              </button>
-            </form>
+            <FormsubmitForm
+              className="space-y-5"
+              subject="📄 Pilootrapport aanvraag (B2B)"
+              formulier="Pilootrapport B2B (voor-organisaties closing-cta)"
+              autoresponse="Bedankt voor uw interesse! Wij sturen u het volledige pilootrapport binnen 24 uur. — Team RevOnc"
+              submitLabel="Vraag het rapport aan"
+              submitClassName="mt-2 w-full cursor-pointer rounded-full bg-[#41c5c0] px-6 py-2.5 text-sm font-normal text-white transition-colors duration-200 ease-out hover:bg-[#176768] disabled:cursor-not-allowed disabled:opacity-60"
+            >
+              <FormField id="rep-naam" name="naam" label="Naam" required />
+              <FormField id="rep-bedrijf" name="bedrijf" label="Bedrijf / Organisatie" />
+              <FormField id="rep-email" name="email" label="E-mailadres" type="email" required />
+              <FormField id="rep-tel" name="telefoon" label="Telefoonnummer" type="tel" />
+            </FormsubmitForm>
             <p className="mt-4 text-center text-xs text-[#00260e]/70">
               We sturen het rapport binnen 24 uur naar uw e-mail.
             </p>

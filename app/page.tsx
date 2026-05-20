@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FaqAccordion } from "@/components/FaqAccordion";
+import { FormsubmitForm } from "@/components/FormsubmitForm";
 
 const faqs = [
   {
@@ -150,7 +151,7 @@ export default function Home() {
         <div className="order-2 grid grid-cols-1 gap-3.5 md:order-1 md:grid-cols-[15.4375rem_15.4375rem]">
           <article className="flex flex-col items-start gap-3.5 rounded-[10px] bg-[#398E8D] p-3.5">
             <h3
-              className="text-lg font-medium capitalize leading-[1.4] tracking-[0.36px] text-[#FFA17A]"
+              className="text-lg font-medium capitalize leading-[1.4] tracking-[0.36px] text-white"
               style={{ fontFamily: "var(--font-display)" }}
             >
               1. Beweegdroom Instellen
@@ -163,7 +164,7 @@ export default function Home() {
 
           <article className="flex flex-col items-start gap-3.5 rounded-[10px] bg-[#398E8D] p-3.5">
             <h3
-              className="text-lg font-medium capitalize leading-[1.4] tracking-[0.36px] text-[#FFA17A]"
+              className="text-lg font-medium capitalize leading-[1.4] tracking-[0.36px] text-white"
               style={{ fontFamily: "var(--font-display)" }}
             >
               2. Fysieke Assessment
@@ -176,7 +177,7 @@ export default function Home() {
 
           <article className="flex flex-col items-start gap-3.5 rounded-[10px] bg-[#398E8D] p-3.5 md:col-span-2">
             <h3
-              className="text-lg font-medium capitalize leading-[1.4] tracking-[0.36px] text-[#FFA17A]"
+              className="text-lg font-medium capitalize leading-[1.4] tracking-[0.36px] text-white"
               style={{ fontFamily: "var(--font-display)" }}
             >
               3. Persoonlijk Trainingsplan
@@ -189,7 +190,7 @@ export default function Home() {
 
           <article className="flex flex-col items-start gap-3.5 rounded-[10px] bg-[#398E8D] p-3.5">
             <h3
-              className="text-lg font-medium capitalize leading-[1.4] tracking-[0.36px] text-[#FFA17A]"
+              className="text-lg font-medium capitalize leading-[1.4] tracking-[0.36px] text-white"
               style={{ fontFamily: "var(--font-display)" }}
             >
               4. Dagelijks Bewegen
@@ -201,7 +202,7 @@ export default function Home() {
 
           <article className="flex flex-col items-start gap-3.5 rounded-[10px] bg-[#398E8D] p-3.5">
             <h3
-              className="text-lg font-medium capitalize leading-[1.4] tracking-[0.36px] text-[#FFA17A]"
+              className="text-lg font-medium capitalize leading-[1.4] tracking-[0.36px] text-white"
               style={{ fontFamily: "var(--font-display)" }}
             >
               5. Wekelijkse Evolutie
@@ -306,7 +307,14 @@ export default function Home() {
                 pilootstudie.
               </p>
 
-              <form className="mt-6 space-y-5">
+              <FormsubmitForm
+                className="mt-6 space-y-5"
+                subject="📄 Pilootrapport aanvraag"
+                formulier="Pilootrapport aanvraag (resultaten-sectie)"
+                autoresponse="Bedankt voor je interesse! Yorin neemt zo snel mogelijk contact met je op en stuurt je het pilootrapport. — Team RevOnc"
+                submitLabel="Pilootrapport downloaden"
+                submitClassName="mt-2 w-full cursor-pointer rounded-full bg-[#41c5c0] px-6 py-2.5 text-sm font-normal text-white transition-colors duration-200 ease-out hover:bg-[#176768] disabled:cursor-not-allowed disabled:opacity-60"
+              >
                 <div>
                   <label
                     htmlFor="naam"
@@ -318,6 +326,7 @@ export default function Home() {
                     id="naam"
                     name="naam"
                     type="text"
+                    required
                     className="mt-1 w-full border-b border-[#00260e]/30 bg-transparent py-1 text-sm outline-none focus:border-[#176768]"
                   />
                 </div>
@@ -333,6 +342,7 @@ export default function Home() {
                     id="email"
                     name="email"
                     type="email"
+                    required
                     className="mt-1 w-full border-b border-[#00260e]/30 bg-transparent py-1 text-sm outline-none focus:border-[#176768]"
                   />
                 </div>
@@ -351,14 +361,7 @@ export default function Home() {
                     className="mt-1 w-full border-b border-[#00260e]/30 bg-transparent py-1 text-sm outline-none focus:border-[#176768]"
                   />
                 </div>
-
-                <button
-                  type="submit"
-                  className="mt-2 w-full cursor-pointer rounded-full bg-[#41c5c0] px-6 py-2.5 text-sm font-normal text-white transition-colors duration-200 ease-out hover:bg-[#176768]"
-                >
-                  Pilootrapport downloaden
-                </button>
-              </form>
+              </FormsubmitForm>
             </div>
           </div>
         </div>
@@ -524,7 +527,14 @@ export default function Home() {
 
             <div className="mx-auto mt-12 max-w-md">
               <div className="rounded-2xl bg-[#C5E8E4] p-8">
-                <form className="space-y-5">
+                <FormsubmitForm
+                  className="space-y-5"
+                  subject="🤝 Kennismaking aanvraag"
+                  formulier="Kennismaking (contact-sectie)"
+                  autoresponse="Bedankt voor je bericht! Yorin neemt zo snel mogelijk contact met je op om een kennismaking in te plannen. — Team RevOnc"
+                  submitLabel="Plan een kennismaking"
+                  submitClassName="mt-2 w-full cursor-pointer rounded-full bg-[#41c5c0] px-6 py-2.5 text-sm font-normal text-white transition-colors duration-200 ease-out hover:bg-[#176768] disabled:cursor-not-allowed disabled:opacity-60"
+                >
                   <div>
                     <label htmlFor="c-naam" className="block text-xs">
                       Uw naam
@@ -533,6 +543,7 @@ export default function Home() {
                       id="c-naam"
                       name="naam"
                       type="text"
+                      required
                       className="mt-1 w-full border-b border-[#00260e]/30 bg-transparent py-1 text-sm outline-none focus:border-[#176768]"
                     />
                   </div>
@@ -544,6 +555,7 @@ export default function Home() {
                       id="c-email"
                       name="email"
                       type="email"
+                      required
                       className="mt-1 w-full border-b border-[#00260e]/30 bg-transparent py-1 text-sm outline-none focus:border-[#176768]"
                     />
                   </div>
@@ -569,14 +581,7 @@ export default function Home() {
                       className="mt-1 w-full border-b border-[#00260e]/30 bg-transparent py-1 text-sm outline-none focus:border-[#176768]"
                     />
                   </div>
-
-                  <button
-                    type="submit"
-                    className="mt-2 w-full cursor-pointer rounded-full bg-[#41c5c0] px-6 py-2.5 text-sm font-normal text-white transition-colors duration-200 ease-out hover:bg-[#176768]"
-                  >
-                    Plan een kennismaking
-                  </button>
-                </form>
+                </FormsubmitForm>
               </div>
 
               <div className="mt-6 text-center">

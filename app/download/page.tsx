@@ -50,7 +50,7 @@ function FakeQR() {
 export default function DownloadPage() {
   return (
     <>
-      <section className="w-full px-6 pt-20 pb-24 text-center">
+      <section className="flex w-full flex-1 flex-col justify-center px-6 pt-20 pb-24 text-center">
         <h1
           className="mx-auto max-w-3xl text-5xl font-medium leading-[0.95] tracking-[-1.5px] text-white md:text-7xl"
           style={{ fontFamily: "var(--font-display)" }}
